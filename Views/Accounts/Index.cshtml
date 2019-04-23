@@ -1,0 +1,26 @@
+@using EFCoreBankAccounts.Models
+@model EFCoreBankAccounts.Models.AccountModelBundle
+@{
+    ViewData["Title"] = "Account";
+}
+<h1>Welcome @Model.Account.User.FirstName @Model.Account.User.LastName</h1>
+<a href="/logout">Logout</a>
+<p>Current Balance: @Model.Account.CurrentBalance</p>
+@Html.Partial("_NewTransaction", @Model.ViewModel)
+<table>
+    <thead>
+        <tr>
+            <th>Transaction amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Transaction transaction in @Model.Account.Transactions)
+        {
+            <tr>
+                <td>@transaction.Amount</td>
+                <td>@transaction.CreatedAt</td>
+            </tr>
+        }
+    </tbody>
+</table>

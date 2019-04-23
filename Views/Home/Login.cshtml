@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Login";
+}
+@model EFCoreBankAccounts.Models.LoginViewModel
+
+<form asp-controller="Home" asp-action="ProcessLoginForm" method="POST">
+    <div asp-validation-summary="All">
+        @if(TempData.Keys.Contains("LoginError"))
+        {
+            <li>@TempData["LoginError"]</li>
+        }
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email">
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password">
+    </div>
+    <button>Login</button>
+</form>

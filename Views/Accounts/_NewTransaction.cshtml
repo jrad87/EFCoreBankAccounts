@@ -1,0 +1,16 @@
+@model EFCoreBankAccounts.Models.TransactionViewModel
+<form asp-controller="Accounts" asp-action="ProcessNewTransaction" method="POST">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Amount"></label>
+        <input asp-for="Amount">
+    </div>
+    <div>
+        <label asp-for="Action"></label>
+        <select 
+            asp-for="Action"
+            asp-items="Html.GetEnumSelectList<EFCoreBankAccounts.Models.TransactionType>()">
+        </select>
+    </div>
+    <button type="submit">Submit</button>
+</form>
