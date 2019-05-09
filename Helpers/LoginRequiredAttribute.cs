@@ -30,10 +30,6 @@ namespace EFCoreBankAccounts {
                 }); 
                 context.Result = new RedirectToRouteResult(route);
             }
-            
-            //Console.WriteLine("Session: {0}", context.HttpContext.Session.GetInt32("AccountId"));
-            //Console.WriteLine("RouteData: {0}", context.RouteData.Values["AccountId"]);
-            //Console.WriteLine((int?)context.RouteData.Values["AccountId"] == context.HttpContext.Session.GetInt32("AccountId"));
             base.OnActionExecuting(context);
         }
     }

@@ -6,7 +6,7 @@
 <h1>Welcome @Model.Account.User.FirstName @Model.Account.User.LastName</h1>
 <a href="/logout">Logout</a>
 <p>Current Balance: @Model.Account.CurrentBalance</p>
-@Html.Partial("_NewTransaction", @Model.ViewModel)
+@await Html.PartialAsync("./_NewTransaction", Model.ViewModel)
 <table>
     <thead>
         <tr>

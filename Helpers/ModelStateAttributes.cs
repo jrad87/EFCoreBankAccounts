@@ -58,7 +58,6 @@ namespace EFCoreBankAccounts
         {
             var controller = context.Controller as Controller;
             var serializedModelState = controller?.TempData[Key] as string;
-
             if(serializedModelState != null)
             {
                 if(context.Result is ViewResult)

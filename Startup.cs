@@ -35,7 +35,7 @@ namespace EFCoreBankAccounts
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromHours(1);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
@@ -49,9 +49,10 @@ namespace EFCoreBankAccounts
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddSessionStateTempDataProvider();
             services.AddDbContext<BasicDbContext>(options => {
-                options.UseMySql("server=127.0.0.1;userid=root;password=root;port=3306;database=efcore_bank_accounts_db;SslMode=None");
+                options.UseMySql("server=127.0.0.1;userid=root;password=root;port=8889;database=efcore_bank_accounts_db;SslMode=None");
             });
         }
 
@@ -73,12 +74,7 @@ namespace EFCoreBankAccounts
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }
