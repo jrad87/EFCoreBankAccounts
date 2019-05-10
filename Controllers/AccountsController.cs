@@ -30,6 +30,7 @@ namespace EFCoreBankAccounts.Controllers
         [ImportModelState]
         public IActionResult Index(int AccountId)
         {
+            Console.WriteLine(ModelState.ErrorCount);
             var accountModel = this.Context
                 .Accounts
                 .Where(account => account.Id == AccountId)

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.Extensions;
 
 
 using EFCoreBankAccounts.Models;
@@ -52,7 +51,7 @@ namespace EFCoreBankAccounts
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddSessionStateTempDataProvider();
             services.AddDbContext<BasicDbContext>(options => {
-                options.UseMySql("server=127.0.0.1;userid=root;password=root;port=8889;database=efcore_bank_accounts_db;SslMode=None");
+                options.UseNpgsql( "server=localhost;userId=postgres;password=postgres;port=5432;database=asp_net_efcore_bank_accounts");
             });
         }
 

@@ -45,6 +45,7 @@ namespace EFCoreBankAccounts.Models
     public class TransactionViewModel
     {
         [OverdraftPrevention(ErrorMessage = "Can not withdraw more than current balance")]
+        [GreaterThanZero(ErrorMessage = "Can not post transaction for zero dollars")]
         public int Amount {get; set;}
         public TransactionType Action {get; set;}
         public int CurrentBalance {get; set;}
@@ -60,6 +61,16 @@ namespace EFCoreBankAccounts.Models
                 .SingleOrDefault();
             this.CurrentBalance = currentAccount.CurrentBalance;    
             this.CanValidate = true;
+        }
+    }
+
+    sealed class GreaterThanZeroAttribute : ValidationAttribute {
+        protected override ValidationResult IsValid(object value, ValidationContext _) {
+            int intValue;
+            if(value != null && int.TryParse(value.ToString(), out intValue) && intValue > 0) {
+                return ValidationResult.Success;
+            }
+            return new ValidationResult(this.ErrorMessage);
         }
     }
 
